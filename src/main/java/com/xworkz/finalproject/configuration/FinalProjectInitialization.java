@@ -12,7 +12,7 @@ public class FinalProjectInitialization extends AbstractAnnotationConfigDispatch
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[0];
+        return new Class[]{FinalProjectConfiguration.class};
     }
 
     @Override
