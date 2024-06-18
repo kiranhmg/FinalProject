@@ -11,4 +11,10 @@ public interface SignUpRepo {
     }
     boolean searchByEmail(SignUpDto signUpDto);
     boolean searchByPhone(SignUpDto signUpDto);
+    Optional<SignUpDto> searchByEmailAndPassword(String email,String password);
+    Optional<SignUpDto> updateLoginCount(SignUpDto signUpDto,String email);
+   SignUpDto searchByEmail1(String email);
+   SignUpDto updateAccountLock(SignUpDto signUpDto);
+   SignUpDto updatePasswordAndUserPassword(SignUpDto signUpDto);
+   SignUpDto updatePassword(SignUpDto signUpDto);
 }

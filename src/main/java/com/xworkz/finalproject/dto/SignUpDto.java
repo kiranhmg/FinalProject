@@ -28,6 +28,33 @@ public class SignUpDto {
     private LocalDate createdDate;
     private LocalDate updatedDate;
     private String password;
+    private String userPassword;
+    private Integer countLogin;
+    private Integer accountLock;
+
+    public Integer getAccountLock() {
+        return accountLock;
+    }
+
+    public void setAccountLock(Integer accountLock) {
+        this.accountLock = accountLock;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public Integer getCountLogin() {
+        return countLogin;
+    }
+
+    public void setCountLogin(Integer countLogin) {
+        this.countLogin = countLogin;
+    }
 
     public SignUpDto()
     {
@@ -127,6 +154,9 @@ public class SignUpDto {
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
                 ", password='" + password + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", countLogin=" + countLogin +
                 '}';
     }
 }
+

@@ -23,51 +23,40 @@
             <div>
                 <a class="navbar-brand" href="index.jsp" style="color: aliceblue;">Home</a>
             </div>
+             <div>
+                <a class="navbar-brand" href="SignIn.jsp" style="color: aliceblue;">Sign in</a>
+              </div>
         </div>
     </nav>
      <div class="container mt-5">
              <div class="card style=width: 18rem;">
                  <div class="card-header">
-                     Sign Up
+                     Password reset
                  </div>
                  <div class="card-body">
-                     <form action="signupdata" method="post" id="signUpForm">
+                     <form action="forgot" method="post" id="signinForm">
+                     ${msg}
+                     ${msg1}
+                      ${msg2}
                      <span style="color:red">
                      <c:forEach items="${valid}" var="obj">
                      ${obj.defaultMessage}
                      </c:forEach>
                      </span>
-                   <h1 style="color:red">${msg}</h1>
-                   <h1 style="color:red">${failed}</h1>
-                     <h1 style="color:green">${success}</h1>
-                         <div class="form-group mb-3">
-                             <label for="firstName">First Name</label>
-                             <input type="text" class="form-control" id="firstName" name="firstName" value="${dto.firstName}" placeholder="Enter first name">
-                             <small class="error" id="firstNameError"></small>
-                         </div>
-                         <div class="form-group mb-3">
-                             <label for="lastName">Last Name</label>
-                             <input type="text" class="form-control" id="lastName" name="lastName" value="${dto.lastName}" placeholder="Enter last name">
-                             <small class="error" id="lastNameError"></small>
-                         </div>
+
+
                          <div class="form-group mb-3">
                              <label for="email">Email</label>
                              <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                              <small class="error" id="emailError"></small>
                          </div>
-                         <div class="form-group mb-3">
-                             <label for="phone">Phone</label>
-                             <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
-                             <small class="error" id="phoneError"></small>
-                         </div>
-                         <div class="form-group form-check mb-3">
-                             <input type="checkbox" class="form-check-input" id="signUpCheck">
-                             <label class="form-check-label" for="signUpCheck">please select check box</label>
-                         </div>
-                         <input type="submit" class="btn btn-primary" value="submit">
+
+                         <input type="submit" class="btn btn-primary" value="send password">
+
                      </form>
                  </div>
              </div>
          </div>
 </body>
 </html>
+

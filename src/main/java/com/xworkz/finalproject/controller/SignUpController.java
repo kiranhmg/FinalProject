@@ -35,9 +35,11 @@ public class SignUpController {
 
                 String fname=signUpDto.getFirstName()+" "+signUpDto.getLastName();
                 signUpDto.setCreatedBy(fname);
-                signUpDto.setUpdatedBy(fname);
+//                signUpDto.setUpdatedBy(fname);
                 signUpDto.setCreatedDate(LocalDate.now());
-                signUpDto.setUpdatedDate(LocalDate.now());
+//                signUpDto.setUpdatedDate(LocalDate.now());
+                signUpDto.setCountLogin(0);
+                signUpDto.setAccountLock(3);
                 Optional<SignUpDto> optional=signUpService.save(signUpDto);
                 if(optional.isPresent())
                 {
@@ -55,5 +57,4 @@ public class SignUpController {
             }
             return "SignUp";
         }
-
 }

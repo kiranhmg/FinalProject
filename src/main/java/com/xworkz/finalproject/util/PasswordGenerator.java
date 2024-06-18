@@ -1,4 +1,4 @@
-package com.xworkz.finalproject.source;
+package com.xworkz.finalproject.util;
 
 import java.security.SecureRandom;
 

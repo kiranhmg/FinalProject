@@ -24,7 +24,7 @@
                       <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="SignUp.jsp">Sign Up</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link text-light fs-5 fw-bold" href="#">Sign In</a>
+                      <a class="nav-link text-light fs-5 fw-bold" href="SignIn.jsp">Sign In</a>
                   </li>
 
               </ul>
