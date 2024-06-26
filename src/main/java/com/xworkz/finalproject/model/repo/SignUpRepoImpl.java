@@ -218,4 +218,25 @@ private EntityManagerFactory entityManagerFactory;
         }
         return null;
     }
+
+    @Override
+    public boolean searchByPhone1(Long phone) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        try {
+            Query query= entityManager.createQuery("select c from SignUpDto c where phone=:phone");
+            query.setParameter("phone",phone);
+            SignUpDto signUpDto=(SignUpDto) query.getSingleResult();
+            if(signUpDto!=null)
+            {
+                return true;
+            }
+        }catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return false;
+    }
 }

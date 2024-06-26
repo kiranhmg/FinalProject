@@ -148,4 +148,16 @@ public class SignUpServiceImpl implements SignUpService{
             return null;
         }
     }
+
+    @Override
+    public boolean searchByPhone1(Long phone) {
+        boolean result=signUpRepo.searchByPhone1(phone);
+        if (result)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

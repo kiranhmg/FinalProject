@@ -17,4 +17,6 @@ public interface SignUpRepo {
    SignUpDto updateAccountLock(SignUpDto signUpDto);
    SignUpDto updatePasswordAndUserPassword(SignUpDto signUpDto);
    SignUpDto updatePassword(SignUpDto signUpDto);
+    boolean searchByPhone1(Long phone);
+
 }

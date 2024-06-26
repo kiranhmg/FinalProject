@@ -13,7 +13,6 @@
                 font-size: 0.9em;
             }
         </style>
-        <script src="/FinalProject/res/signup.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-light bg-dark">
@@ -24,15 +23,16 @@
             <div>
                 <a class="navbar-brand" href="index.jsp" style="color: aliceblue;">Home</a>
             </div>
+            <img src="${pageContext.request.contextPath}${sessionScope.profilefind}" width="70" height="70" value="" class="rounded-circle profile-image id=profileImage">
         </div>
     </nav>
      <div class="container mt-5">
              <div class="card style=width: 18rem;">
                  <div class="card-header">
-                     Sign Up
+                   Profile Edit
                  </div>
                  <div class="card-body">
-                     <form action="signupdata" method="post" id="signUpForm">
+                     <form action="editProfile" method="post" id="signUpForm" enctype="multipart/form-data">
                      <span style="color:red">
                      <c:forEach items="${valid}" var="obj">
                      ${obj.defaultMessage}
@@ -43,34 +43,32 @@
                      <h1 style="color:green">${success}</h1>
                          <div class="form-group mb-3">
                              <label for="firstName">First Name</label>
-                             <input type="text" class="form-control" id="firstName" name="firstName" value="${dto.firstName}" placeholder="Enter first name">
+                             <input type="text" class="form-control" id="firstName" name="firstName"  value="${sessionScope.firstName}" placeholder="Enter first name">
                              <small class="error" id="firstNameError"></small>
                          </div>
                          <div class="form-group mb-3">
                              <label for="lastName">Last Name</label>
-                             <input type="text" class="form-control" id="lastName" name="lastName" value="${dto.lastName}" placeholder="Enter last name">
+                             <input type="text" class="form-control" id="lastName" name="lastName"  value="${sessionScope.lastName}" placeholder="Enter last name">
                              <small class="error" id="lastNameError"></small>
                          </div>
                          <div class="form-group mb-3">
                              <label for="email">Email</label>
-                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" onblur="validateEmail()">
+                             <input type="email" class="form-control" id="email" name="email" ${sessionScope.action =='edit'?'readonly':''} value="${sessionScope.email}" placeholder="Enter email">
                              <small class="error" id="emailError"></small>
                          </div>
                          <div class="form-group mb-3">
                              <label for="phone">Phone</label>
-                             <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" onblur="validatePhone()">
+                             <input type="tel" class="form-control" id="phone" name="phone"  value="${sessionScope.phone}" placeholder="Enter phone number">
                              <small class="error" id="phoneError"></small>
                          </div>
                          <div class="form-group form-check mb-3">
-                             <input type="checkbox" class="form-check-input" id="signUpCheck">
-                             <label class="form-check-label" for="signUpCheck">please select check box</label>
+                             <label for="fileUpload">Upload File:</label>
+                            <input type="file" class="form-control" id="fileUpload" name="fileUpload">
                          </div>
-                         <input type="submit" class="btn btn-primary" value="submit" id="btn">
+                         <input type="submit" class="btn btn-primary" value="Upload">
                      </form>
                  </div>
              </div>
          </div>
-
-
 </body>
 </html>

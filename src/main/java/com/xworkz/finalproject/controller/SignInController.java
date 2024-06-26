@@ -1,9 +1,10 @@
 package com.xworkz.finalproject.controller;
 
+import com.xworkz.finalproject.dto.ImageUploadDto;
 import com.xworkz.finalproject.dto.PasswordResetDto;
+import com.xworkz.finalproject.dto.RiseComplaintDto;
 import com.xworkz.finalproject.dto.SignUpDto;
-import com.xworkz.finalproject.model.service.PasswordResetService;
-import com.xworkz.finalproject.model.service.SignUpService;
+import com.xworkz.finalproject.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,6 +26,12 @@ public class SignInController {
     private SignUpService signUpService;
     @Autowired
     private PasswordResetService passwordResetService;
+    @Autowired
+    private ProfileEditService profileEditService;
+    @Autowired
+    private ImageUploadService imageUploadService;
+    @Autowired
+    private RiseComplaintService riseComplaintService;
 
     private int accCount=3;
     public SignInController()
@@ -28,8 +40,7 @@ public class SignInController {
     }
 
     @PostMapping("/signindata")
-    public String signIn(@RequestParam String email, @RequestParam String password, Model model,SignUpDto signUpDto)
-    {
+    public String signIn(@RequestParam String email, @RequestParam String password, Model model, SignUpDto signUpDto,HttpSession session) throws IOException {
         System.out.println(signUpDto);
         Optional<SignUpDto> optional=signUpService.searchByEmailAndPassword(email,password);
         if(optional.isPresent()) {
@@ -37,7 +48,19 @@ public class SignInController {
             model.addAttribute("msg", "email and password valid");
             model.addAttribute("action", "retain");
             model.addAttribute("key", optional.get());
-
+            Optional<List<ImageUploadDto>> imageUploadDto=imageUploadService.findByUserId(optional.get().getId());
+            if(imageUploadDto.isPresent())
+            {
+                for (ImageUploadDto img:imageUploadDto.get()
+                ) {
+                    if(img.getStatus().equals("active")|| img.getStatus()=="active") {
+                        session.setAttribute("profilefind", "/profile/" + img.getName());
+                    }
+                }
+            }
+            else {
+                session.setAttribute("profilefind", "/profile/" +"profile1");
+            }
             SignUpDto emailCount = signUpService.searchByEmail1(email);
             emailCount.setAccountLock(3);
             signUpService.updateAccountLock(emailCount);
@@ -49,7 +72,18 @@ public class SignInController {
                 emailCount.setCountLogin(emailCount.getCountLogin() + 1);
                 Optional<SignUpDto> optional2 = signUpService.updateLoginCount(emailCount, email);
 
-                return "index";
+
+                session.setAttribute("email",email);
+                session.setAttribute("firstName",emailCount.getFirstName());
+                session.setAttribute("lastName",emailCount.getLastName());
+                session.setAttribute("phone",emailCount.getPhone());
+                session.setAttribute("action","edit");
+          List<RiseComplaintDto> optional1=riseComplaintService.searchByUid(emailCount.getId());
+          session.setAttribute("dto",optional1);
+
+                model.addAttribute("action","edit");
+
+                return "UserhomePage";
             }
         }
         else {
