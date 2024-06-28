@@ -55,21 +55,23 @@
                                  <div class="form-group">
                                      <label for="country">Country:</label>
                                      <select class="form-control country" id="country" name="country" onchange="loadStates()">
-                                         <option value="">Select Country</option>
+
+                                          <option value="">Select Country</option>
                                      </select>
                                  </div>
 
                                  <div class="form-group">
                                      <label for="state">State:</label>
                                      <select class="form-control state" id="state" name="state" onchange="loadCities()" disabled>
-                                         <option value="">Select State</option>
+                                        <option value="">Select state</option>
                                      </select>
                                  </div>
 
                                  <div class="form-group">
                                      <label for="city">City:</label>
                                      <select class="form-control city" id="city" name="city">
-                                         <option value="">Select City</option>
+
+                                          <option value="">Select city</option>
                                      </select>
                                  </div>
                                   <label for="message">Description:</label>
@@ -78,8 +80,14 @@
                                                  <span id="charCount">0</span> / 1500 characters used
 
                                              </div>
+                                              <div class="mb-3">
+                                                                     <label for="area" class="form-label">Area:</label>
+                                                                     <input type="text" class="form-control" id="area" name="area">
+                                                                 </div>
 
-                                 <button type="submit" class="btn btn-primary">Submit</button>
+
+                                                       <input type="submit" class="btn btn-primary" value="submit" name="submit">
+
                              </form>
 
                              <script>

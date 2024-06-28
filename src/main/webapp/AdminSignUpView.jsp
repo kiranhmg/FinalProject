@@ -23,6 +23,9 @@
             <div>
                 <a class="navbar-brand" href="index.jsp" style="color: aliceblue;">Home</a>
             </div>
+             <div>
+                            <a class="navbar-brand" href="AdminLoginSuccess.jsp" style="color: aliceblue;">admin home page</a>
+                        </div>
         </div>
     </nav>
      <div class="container mt-5">

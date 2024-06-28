@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface AdminService {
     Optional<AdminDto> saveAdmin(AdminDto adminDto);
-    List<SignUpDto> viewSignUp(SignUpDto signUpDto,AdminDto adminDto);
+    List<SignUpDto> viewSignUp(SignUpDto signUpDto);
+    AdminDto findByEmailAndPassword(AdminDto adminDto);
+
 
 }

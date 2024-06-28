@@ -39,4 +39,30 @@ public class RiseComplaintServiceImpl implements RiseComplaintService{
             return Collections.emptyList();
         }
     }
+
+    @Override
+    public RiseComplaintDto searchById(int id) {
+        RiseComplaintDto riseComplaintDto=riseComplaintRepo.searchById(id);
+        if (riseComplaintDto!=null)
+        {
+            return riseComplaintDto;
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean updateComplaint(RiseComplaintDto riseComplaintDto) {
+        boolean result= riseComplaintRepo.updateComplaint(riseComplaintDto);
+        if(result)
+        {
+            System.out.println("updated success fully");
+            return result;
+        }
+        else {
+            System.out.println("not updated");
+            return false;
+        }
+    }
 }

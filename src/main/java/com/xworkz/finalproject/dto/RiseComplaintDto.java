@@ -18,6 +18,7 @@ public class RiseComplaintDto {
     private LocalDateTime createdAt;
     private String status;
     private int userId;
+    private String area;
 
     public int getId() {
         return id;
@@ -75,7 +76,7 @@ public class RiseComplaintDto {
         this.createdBy = createdBy;
     }
 
-    public LocalDateTime getCreatedAt(LocalDateTime now) {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -97,6 +98,14 @@ public class RiseComplaintDto {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
     @Override

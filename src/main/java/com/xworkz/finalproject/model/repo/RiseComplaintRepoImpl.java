@@ -49,4 +49,44 @@ public class RiseComplaintRepoImpl implements RiseComplaintRepo{
         }
         return Collections.emptyList();
     }
+
+    @Override
+    public RiseComplaintDto searchById(int id) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        try {
+            Query query= entityManager.createQuery("select c from RiseComplaintDto c where id=:id");
+            query.setParameter("id",id);
+            RiseComplaintDto riseComplaintDto=(RiseComplaintDto) query.getSingleResult();
+            return riseComplaintDto;
+
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateComplaint(RiseComplaintDto riseComplaintDto) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction= entityManager.getTransaction();
+        try{
+            entityTransaction.begin();
+           entityManager.merge(riseComplaintDto);
+            entityTransaction.commit();
+            return true;
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return false;
+    }
 }

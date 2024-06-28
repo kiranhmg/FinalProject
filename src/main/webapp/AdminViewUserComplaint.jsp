@@ -22,13 +22,36 @@
 
         </div>
           </nav>
-     <div class="container">
-            <h2></h2>
+      <div class="container mt-5">
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-6 custom-width">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>View Complaints</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="adminviewcomplaint" method="post">
+                                <div class="mb-3">
+                                    <label for="issueType" class="form-label">Issue Type:</label>
+                                    <select class="form-control" id="issueType" name="issueType">
+                                        <option value="">Select Issue Type</option>
+                                        <option value="electricity">Electricity</option>
+                                        <option value="water">Water</option>
+                                        <option value="road">Road</option>
+                                        <option value="drainage">Drainage</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="area" class="form-label">Area:</label>
+                                    <input type="text" class="form-control" id="area" name="area">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
-
-              </br>
-              ${key}
 
 <c:if test="${list.isEmpty() == false}">
 <table class="table table-dark">
@@ -64,6 +87,6 @@
 </table>
 </c:if>
  </div>
-
+</div>
 </body>
 </html>

@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface RiseComplaintRepo {
     Optional<RiseComplaintDto> saveComplaint(RiseComplaintDto riseComplaintDto);
     List<RiseComplaintDto> searchByUid(int uid);
+    RiseComplaintDto searchById(int id);
+    boolean updateComplaint(RiseComplaintDto riseComplaintDto);
 }

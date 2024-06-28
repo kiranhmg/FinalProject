@@ -31,7 +31,7 @@
                      Admin Login
                  </div>
                  <div class="card-body">
-                     <form action="adminlog" method="post" id="signinForm">
+                     <form action="adminlogin" method="post" id="signinForm">
                      ${msg}
                      <span style="color:red">
                      <c:forEach items="${valid}" var="obj">

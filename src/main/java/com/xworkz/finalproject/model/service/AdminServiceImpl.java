@@ -35,14 +35,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<SignUpDto> viewSignUp(SignUpDto signUpDto, AdminDto adminDto) {
-        AdminDto adminDto1 = adminRepo.findByEmailAndPassword(adminDto);
-        if (adminDto1==null) {
-            System.out.println("email or password exists");
-            return Collections.emptyList();
-        } else {
+    public List<SignUpDto> viewSignUp(SignUpDto signUpDto) {
 
-            List<SignUpDto> list = adminRepo.viewSignUp(signUpDto);
+        List<SignUpDto> list = adminRepo.viewSignUp(signUpDto);
             if (!list.isEmpty()) {
                 System.out.println("sign up details fetching");
                 return list;
@@ -53,5 +48,19 @@ public class AdminServiceImpl implements AdminService {
         }
 
 
+
+
+    @Override
+    public AdminDto findByEmailAndPassword(AdminDto adminDto) {
+        AdminDto adminDto1=adminRepo.findByEmailAndPassword(adminDto);
+        if(adminDto1!=null)
+        {
+            System.out.println("email and password valid");
+            return adminDto1;
+        }
+        else {
+            System.out.println("email and password not found");
+            return null;
+        }
     }
 }

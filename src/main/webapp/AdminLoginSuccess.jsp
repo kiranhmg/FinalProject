@@ -21,17 +21,13 @@
                 <img src="/FinalProject/res/xworkz.png" alt="" width="100" height="50">
             </a>
             <div>
-                        <a class="navbar-brand" href="RiseComplaints.jsp" style="color: aliceblue;">RiseComplaint</a>
-                           </div>
-               <a class="navbar-brand" href="viewcomplaint" style="color: aliceblue;">View complaints</a>
+                <a class="navbar-brand" href="index.jsp" style="color: aliceblue;">Home</a>
+            </div>
+         <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="adminlog">user details</a>
+         <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="AdminViewUserComplaint.jsp">view complaints</a>
 
-              <div>
-            <a class="navbar-brand" href="ProfileEdit.jsp" style="color: aliceblue;">Edit Profile</a>
-               </div>
-                 </div>
-                           <img src="${pageContext.request.contextPath}${sessionScope.profilefind}" width="70" height="70" value="" class="rounded-circle profile-image id=profileImage">
-                       </div>
         </div>
     </nav>
+
 </body>
 </html>
