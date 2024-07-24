@@ -27,6 +27,9 @@
              <div>
                 <a class="navbar-brand" href="admin.jsp" style="color: aliceblue;">Admin Login</a>
               </div>
+              <div>
+                <a class="navbar-brand" href="Departmentadminlogin.jsp" style="color: aliceblue;">Department Admin Login</a>
+               </div>
         </div>
     </nav>
      <div class="container mt-5">

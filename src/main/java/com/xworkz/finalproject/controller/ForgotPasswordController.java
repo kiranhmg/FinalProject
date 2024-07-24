@@ -19,7 +19,7 @@ public class ForgotPasswordController {
     {
         System.out.println("forgot password created");
     }
-@PostMapping("/forgot")
+    @PostMapping("/forgot")
     public String forgotPassword(@RequestParam String email, Model model)
     {
         SignUpDto signUpDto=signUpService.searchByEmail1(email);

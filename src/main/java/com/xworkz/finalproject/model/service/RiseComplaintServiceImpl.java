@@ -2,6 +2,7 @@ package com.xworkz.finalproject.model.service;
 
 import com.xworkz.finalproject.dto.RiseComplaintDto;
 import com.xworkz.finalproject.model.repo.RiseComplaintRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class RiseComplaintServiceImpl implements RiseComplaintService{
     @Autowired
     private RiseComplaintRepo riseComplaintRepo;

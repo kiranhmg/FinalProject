@@ -43,12 +43,12 @@
                      <h1 style="color:green">${success}</h1>
                          <div class="form-group mb-3">
                              <label for="firstName">First Name</label>
-                             <input type="text" class="form-control" id="firstName" name="firstName" value="${dto.firstName}" placeholder="Enter first name">
+                             <input type="text" class="form-control" id="firstName" name="firstName" value="${dto.firstName}" placeholder="Enter first name"  onblur="validateFirstName()">
                              <small class="error" id="firstNameError"></small>
                          </div>
                          <div class="form-group mb-3">
                              <label for="lastName">Last Name</label>
-                             <input type="text" class="form-control" id="lastName" name="lastName" value="${dto.lastName}" placeholder="Enter last name">
+                             <input type="text" class="form-control" id="lastName" name="lastName" value="${dto.lastName}" placeholder="Enter last name"  onblur="validateLastName()">
                              <small class="error" id="lastNameError"></small>
                          </div>
                          <div class="form-group mb-3">

@@ -1,7 +1,6 @@
 package com.xworkz.finalproject.model.repo;
 
-import com.xworkz.finalproject.dto.AdminDto;
-import com.xworkz.finalproject.dto.SignUpDto;
+import com.xworkz.finalproject.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -72,5 +71,84 @@ public class AdminRepoImpl implements AdminRepo{
             entityManager.close();
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public DepartmentDto findDepartment(String type) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        try {
+            Query query= entityManager.createQuery("select c from DepartmentDto c where type=:type");
+            query.setParameter("type",type);
+            DepartmentDto departmentDto=(DepartmentDto) query.getSingleResult();
+            return departmentDto;
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public ComplaintHistory saveHistory(ComplaintHistory complaintHistory) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction= entityManager.getTransaction();
+        try {
+            entityTransaction.begin();
+            entityManager.persist(complaintHistory);
+            entityTransaction.commit();
+            return complaintHistory;
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public AddDepartmentAdminDto findByEmailOrPhone(AddDepartmentAdminDto adminDto) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        try {
+            Query query= entityManager.createQuery("select c from AddDepartmentAdminDto c where email=:email or phone=:phone");
+            query.setParameter("email",adminDto.getEmail());
+            query.setParameter("phone",adminDto.getPhone());
+            AddDepartmentAdminDto adminDto1=(AddDepartmentAdminDto) query.getSingleResult();
+            return adminDto1;
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean saveDepartmentAdmins(AddDepartmentAdminDto adminDto) {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction= entityManager.getTransaction();
+        try {
+            entityTransaction.begin();
+            entityManager.persist(adminDto);
+            entityTransaction.commit();
+            return true;
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return false;
     }
 }

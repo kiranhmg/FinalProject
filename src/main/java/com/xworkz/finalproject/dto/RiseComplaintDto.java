@@ -19,6 +19,17 @@ public class RiseComplaintDto {
     private String status;
     private int userId;
     private String area;
+    @Column(name = "dept_id")
+    private Integer deptId;
+    private Integer empId;
+
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
 
     public int getId() {
         return id;
@@ -106,6 +117,14 @@ public class RiseComplaintDto {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
     @Override

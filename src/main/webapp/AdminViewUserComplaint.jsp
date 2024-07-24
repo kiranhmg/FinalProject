@@ -64,7 +64,10 @@
       <th scope="col">city</th>
        <th scope="col">status</th>
       <th scope="col">message</th>
-      <th scope="col">Edit</th>
+      <th scope="col">assign</th>
+      <th scope="col">action</th>
+      <th scope="col">update</th>
+
 
     </tr>
   </thead>
@@ -78,8 +81,47 @@
         <td>${inventory.city}</td>
           <td>${inventory.status}</td>
         <td>${inventory.message}</td>
-       <td><a href="findandedit?id=${inventory.id}&edit=edit"> Edit</a></td>
+           <td class="d-none d-md-table-cell">
 
+                                <c:if test="${inventory.status != 'resolved'}">
+                               <form action="assigndepartment" method="post">
+                                   <input type="hidden" name="id" value="${inventory.id}">
+                                   <div class="btn-group">
+                                       <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                           Assign
+                                       </button>
+                                       <ul class="dropdown-menu">
+                                           <li><button class="dropdown-item" type="submit" name="assign" value="water">Water</button></li>
+                                           <li><button class="dropdown-item" type="submit" name="assign" value="electricity">Electricity</button></li>
+                                           <li><button class="dropdown-item" type="submit" name="assign" value="road">Road</button></li>
+                                           <li><button class="dropdown-item" type="submit" name="assign" value="drainage">Drainage</button></li>
+                                       </ul>
+                                   </div>
+                               </form></td>
+        </c:if>
+<td class="d-none d-md-table-cell">
+                        <c:if test="${inventory.status != 'resolved'}">
+
+                            <form action="action" method="post"> <!-- Status form -->
+                                <input type="hidden" name="id" value="${inventory.id}">
+                                  <div class="input-group">
+                                <select class="form-select" id="status" name="status">
+                                    <option value="0" ${selectedType == null ? 'selected' : ''}>Choose...</option>
+                                    <option value="active" ${selectedType == 'active' ? 'selected' : ''}>Active</option>
+                                    <option value="resolved" ${selectedType == 'resolved' ? 'selected' : ''}>Resolved</option>
+                                    <option value="pending" ${selectedType == 'pending' ? 'selected' : ''}>Pending</option>
+
+                                </select>
+                                <td class="d-none d-md-table-cell">
+                                   <button type="submit" class="btn btn-primary">Update</button>
+                                    </td>
+                                 </div>
+                               </form>
+                        </td>
+                         </c:if>
+  <c:if test="${inventory.status == 'resolved'}">
+<td></td>
+ </c:if>
         </tr>
   </c:forEach>
 
@@ -88,5 +130,9 @@
 </c:if>
  </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
 </body>
 </html>

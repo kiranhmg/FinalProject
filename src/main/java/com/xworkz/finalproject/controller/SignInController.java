@@ -1,10 +1,10 @@
 package com.xworkz.finalproject.controller;
 
 import com.xworkz.finalproject.dto.ImageUploadDto;
-import com.xworkz.finalproject.dto.PasswordResetDto;
 import com.xworkz.finalproject.dto.RiseComplaintDto;
 import com.xworkz.finalproject.dto.SignUpDto;
 import com.xworkz.finalproject.model.service.*;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+
 @Controller
 @RequestMapping("/")
 public class SignInController {
+    private  Logger log = LogManager.getLogger(SignInController.class);
+
     @Autowired
     private SignUpService signUpService;
     @Autowired
@@ -36,7 +38,7 @@ public class SignInController {
     private int accCount=3;
     public SignInController()
     {
-        System.out.println("sign in controller created");
+        log.info("Test");
     }
 
     @PostMapping("/signindata")
@@ -99,7 +101,7 @@ public class SignInController {
                 return "SignIn";
             }
             else {
-                model.addAttribute("msg2","sorry your accont is locked please click forgot password");
+                model.addAttribute("msg2","sorry your account is locked please click forgot password");
                 signUpDto1.setPassword(null);
                 signUpDto1.setUserPassword(null);
                     signUpService.updatePasswordAndUserPassword(signUpDto1);

@@ -23,10 +23,8 @@
             <div>
                 <a class="navbar-brand" href="index.jsp" style="color: aliceblue;">Home</a>
             </div>
-         <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="adminlog">user details</a>
-         <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="AdminViewUserComplaint.jsp">view complaints</a>
-       <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="adddepartmentadmin">Add Department Admin</a>
-
+         <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="addEmployee">Add Employees</a>
+         <a class="nav-link active text-light fs-5 fw-bold" aria-current="page" href="DepartmentAdminViewComplaints">view complaints</a>
 
         </div>
     </nav>

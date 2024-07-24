@@ -4,6 +4,7 @@ import com.xworkz.finalproject.dto.SignUpDto;
 import com.xworkz.finalproject.model.repo.SignUpRepo;
 import com.xworkz.finalproject.util.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;

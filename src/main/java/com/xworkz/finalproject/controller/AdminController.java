@@ -1,18 +1,15 @@
 package com.xworkz.finalproject.controller;
 
-import com.xworkz.finalproject.dto.AdminDto;
-import com.xworkz.finalproject.dto.RiseComplaintDto;
-import com.xworkz.finalproject.dto.SignUpDto;
+import com.xworkz.finalproject.dto.*;
 import com.xworkz.finalproject.model.service.AdminService;
 import com.xworkz.finalproject.model.service.AdminViewComplaintService;
+import com.xworkz.finalproject.model.service.DepartmentAdminService;
+import com.xworkz.finalproject.model.service.RiseComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,6 +22,10 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private AdminViewComplaintService adminViewComplaintService;
+    @Autowired
+    private RiseComplaintService riseComplaintService;
+    @Autowired
+    private DepartmentAdminService departmentAdminService;
     public AdminController()
     {
         System.out.println("admin controller is created");
@@ -95,5 +96,81 @@ public class AdminController {
     return "AdminViewUserComplaint";
 }
 
+
+@PostMapping("/assigndepartment")
+    public String assignDepartment(@RequestParam String assign,@RequestParam int id,Model model)
+{
+    RiseComplaintDto riseComplaintDto=riseComplaintService.searchById(id);
+    DepartmentDto departmentDto=adminService.findDepartment(assign);
+    ComplaintHistory complaintHistory=new ComplaintHistory();
+    if(departmentDto!=null) {
+
+        riseComplaintDto.setDeptId(departmentDto.getId());
+        riseComplaintService.updateComplaint(riseComplaintDto);
+        complaintHistory.setCid(id);
+        complaintHistory.setUid(riseComplaintDto.getUserId());
+        complaintHistory.setDid(departmentDto.getId());
+        complaintHistory.setStatus(riseComplaintDto.getStatus());
+        adminService.saveHistory(complaintHistory);
+        model.addAttribute("msg","complaint assign to department successfully");
+        return "AdminViewUserComplaint";
     }
+    else {
+        model.addAttribute("msg","department not found");
+    }
+
+    return "AdminViewUserComplaint";
+}
+
+@PostMapping("/action")
+    public String solveProblem(@RequestParam int id,@RequestParam String status)
+{
+    RiseComplaintDto riseComplaintDto=riseComplaintService.searchById(id);
+    ComplaintHistory complaintHistory=new ComplaintHistory();
+
+    if(riseComplaintDto!=null)
+{
+    riseComplaintDto.setStatus(status);
+    riseComplaintService.updateComplaint(riseComplaintDto);
+    complaintHistory.setCid(id);
+    complaintHistory.setUid(riseComplaintDto.getUserId());
+    complaintHistory.setDid(riseComplaintDto.getDeptId());
+    complaintHistory.setStatus(status);
+    adminService.saveHistory(complaintHistory);
+    return "AdminViewUserComplaint";
+}
+    return "AdminViewUserComplaint";
+}
+    @GetMapping("/adddepartmentadmin")
+    public String findDepartment(Model model)
+    {
+        List<DepartmentDto> list=departmentAdminService.departmrntList();
+        if(!list.isEmpty())
+        {
+            System.err.println(list);
+            model.addAttribute("list",list);
+            return "AddDepartmentAdmin";
+        }
+        else
+        {
+            return "AddDepartmentAdmin";
+        }
+    }
+@PostMapping("/addadminofdepartment")
+    public String addDepartmentsAdmins(AddDepartmentAdminDto adminDto,Model model)
+{
+    List<DepartmentDto> departmentDtos=departmentAdminService.departmrntList();
+    boolean result=adminService.saveDepartmentAdmins(adminDto);
+    if (result)
+    {
+        model.addAttribute("list",departmentDtos);
+        System.out.println("saved success fully");
+        return "AddDepartmentAdmin";
+    }
+    else {
+        return "AddDepartmentAdmin";
+    }
+
+}
+}
 
