@@ -13,6 +13,7 @@ public interface AdminRepo {
     ComplaintHistory saveHistory(ComplaintHistory complaintHistory);
     AddDepartmentAdminDto findByEmailOrPhone(AddDepartmentAdminDto adminDto);
     boolean saveDepartmentAdmins(AddDepartmentAdminDto adminDto);
+    List<RiseComplaintDto> findAllComplaints();
 
 
 }

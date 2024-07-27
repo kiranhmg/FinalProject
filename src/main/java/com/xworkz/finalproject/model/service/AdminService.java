@@ -12,6 +12,8 @@ public interface AdminService {
     DepartmentDto findDepartment(String type);
     ComplaintHistory saveHistory(ComplaintHistory complaintHistory);
     boolean saveDepartmentAdmins(AddDepartmentAdminDto adminDto);
+    List<RiseComplaintDto> findAllComplaints();
+
 
 
 

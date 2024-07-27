@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +71,7 @@ public class AdminController {
 
         }
 @PostMapping("/adminviewcomplaint")
-    public String viewComplaints(@RequestParam String issueType,@RequestParam String area,Model model)
+    public String viewComplaints(@RequestParam String issueType, @RequestParam String area, Model model, HttpServletRequest request)
 {
     List<RiseComplaintDto> list=adminViewComplaintService.findByIssueAndArea(issueType, area);
     if (!list.isEmpty())
@@ -90,9 +91,11 @@ public class AdminController {
             return "AdminViewUserComplaint";
         }
         else {
+
             model.addAttribute("msg","data not found");
         }
     }
+
     return "AdminViewUserComplaint";
 }
 
@@ -103,6 +106,7 @@ public class AdminController {
     RiseComplaintDto riseComplaintDto=riseComplaintService.searchById(id);
     DepartmentDto departmentDto=adminService.findDepartment(assign);
     ComplaintHistory complaintHistory=new ComplaintHistory();
+    List<RiseComplaintDto> riseComplaintDtos=adminService.findAllComplaints();
     if(departmentDto!=null) {
 
         riseComplaintDto.setDeptId(departmentDto.getId());
@@ -112,22 +116,24 @@ public class AdminController {
         complaintHistory.setDid(departmentDto.getId());
         complaintHistory.setStatus(riseComplaintDto.getStatus());
         adminService.saveHistory(complaintHistory);
+        model.addAttribute("list",riseComplaintDtos);
         model.addAttribute("msg","complaint assign to department successfully");
+
         return "AdminViewUserComplaint";
     }
     else {
         model.addAttribute("msg","department not found");
     }
 
-    return "AdminViewUserComplaint";
+    return "redirect:/AdminViewUserComplaint";
 }
 
 @PostMapping("/action")
-    public String solveProblem(@RequestParam int id,@RequestParam String status)
+    public String solveProblem(@RequestParam int id,@RequestParam String status,Model model)
 {
     RiseComplaintDto riseComplaintDto=riseComplaintService.searchById(id);
     ComplaintHistory complaintHistory=new ComplaintHistory();
-
+List<RiseComplaintDto> riseComplaintDtos=adminService.findAllComplaints();
     if(riseComplaintDto!=null)
 {
     riseComplaintDto.setStatus(status);
@@ -137,6 +143,7 @@ public class AdminController {
     complaintHistory.setDid(riseComplaintDto.getDeptId());
     complaintHistory.setStatus(status);
     adminService.saveHistory(complaintHistory);
+    model.addAttribute("list",riseComplaintDtos);
     return "AdminViewUserComplaint";
 }
     return "AdminViewUserComplaint";

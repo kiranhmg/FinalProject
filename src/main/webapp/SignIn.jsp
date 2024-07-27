@@ -30,6 +30,9 @@
               <div>
                 <a class="navbar-brand" href="Departmentadminlogin.jsp" style="color: aliceblue;">Department Admin Login</a>
                </div>
+                <div>
+                               <a class="navbar-brand" href="EmployeeLogin.jsp" style="color: aliceblue;">Employee Login</a>
+                              </div>
         </div>
     </nav>
      <div class="container mt-5">

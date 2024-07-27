@@ -151,4 +151,22 @@ public class AdminRepoImpl implements AdminRepo{
         }
         return false;
     }
+
+    @Override
+    public List<RiseComplaintDto> findAllComplaints() {
+        EntityManager entityManager= entityManagerFactory.createEntityManager();
+        try {
+            Query query= entityManager.createQuery("select c from RiseComplaintDto c ");
+            List<RiseComplaintDto> list=(List<RiseComplaintDto>) query.getResultList();
+            return list;
+        }
+        catch (PersistenceException persistenceException)
+        {
+            persistenceException.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return Collections.emptyList();
+    }
 }

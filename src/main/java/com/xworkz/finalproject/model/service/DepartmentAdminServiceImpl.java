@@ -2,6 +2,7 @@ package com.xworkz.finalproject.model.service;
 
 import com.xworkz.finalproject.dto.*;
 import com.xworkz.finalproject.model.repo.DepartmentAdminRepo;
+import com.xworkz.finalproject.util.OtpGenerator;
 import com.xworkz.finalproject.util.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -71,7 +72,7 @@ public class DepartmentAdminServiceImpl implements DepartmentAdminService{
             return false;
         }
         else {
-            String password= PasswordGenerator.generatePassword();
+            String password= OtpGenerator.generatePassword();
             employeeDto.setPassword(password);
            employeeDto.setDeptId(dto.getId());
            sendEmail(employeeDto);

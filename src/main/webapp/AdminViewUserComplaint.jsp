@@ -86,6 +86,7 @@
                                 <c:if test="${inventory.status != 'resolved'}">
                                <form action="assigndepartment" method="post">
                                    <input type="hidden" name="id" value="${inventory.id}">
+
                                    <div class="btn-group">
                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                            Assign

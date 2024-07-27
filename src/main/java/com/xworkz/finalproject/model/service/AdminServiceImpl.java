@@ -137,4 +137,16 @@ public class AdminServiceImpl implements AdminService {
 
         }
     }
+
+    @Override
+    public List<RiseComplaintDto> findAllComplaints() {
+        List<RiseComplaintDto> list=adminRepo.findAllComplaints();
+        if (!list.isEmpty())
+        {
+            return list;
+        }
+        else {
+            return Collections.emptyList();
+        }
+    }
 }
